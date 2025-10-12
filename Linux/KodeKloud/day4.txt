@@ -1,0 +1,243 @@
+    1  history
+➜  ~ cd Documents/Training/Linux_training/KodeKloud 
+➜  KodeKloud mkdir -p /dir1/sub_dir1/
+mkdir: cannot create directory ‘/dir1’: Permission denied
+➜  KodeKloud ls                      
+Additional-Topics.pdf  day2.txt  day3.txt  day4.txt
+➜  KodeKloud mkdir -p /dir1/sub_dir1 
+mkdir: cannot create directory ‘/dir1’: Permission denied
+➜  KodeKloud sudo mkdir -p /dir1/sub_dir1
+[sudo] password for maryse: 
+➜  KodeKloud ls
+Additional-Topics.pdf  day2.txt  day3.txt  day4.txt
+➜  KodeKloud ls
+Additional-Topics.pdf  day2.txt  day3.txt  day4.txt
+➜  KodeKloud cd
+➜  ~ mkdir -p /home/maryse/Documents/Training/Linux_training/KodeKloud/dir1/sub_dir1
+➜  ~ cd Documents/Training/Linux_training/KodeKloud 
+➜  KodeKloud ls
+Additional-Topics.pdf  day2.txt  day3.txt  day4.txt  dir1
+➜  KodeKloud cd dir1/sub_dir1 
+➜  sub_dir1 cd ..
+➜  dir1 cd ..
+➜  KodeKloud touch dir1/sub_dir1/kode1.txt 
+➜  KodeKloud cd dir1/sub_dir1/ 
+➜  sub_dir1 la
+total 0
+-rw-r--r-- 1 maryse maryse 0 Oct  6 06:50 kode1.txt
+➜  sub_dir1 cat > kode1.txt 
+some text
+cant create directories and parent directories only from the home dir
+mkdir -p /home/~/~%                                                             ➜  sub_dir1 cat > kode2.txt
+some text
+if you want to create a directory in the current dir use
+mkdir -p ./dir1/sub_dir1%                                                       ➜  sub_dir1 cd ../..
+➜  KodeKloud mkdir ./dir1/sub_dir2 
+➜  KodeKloud ls
+Additional-Topics.pdf  day2.txt  day3.txt  day4.txt  dir1
+➜  KodeKloud cd dir1 
+➜  dir1 ls
+sub_dir1  sub_dir2
+➜  dir1 cd ..
+➜  KodeKloud du -sk dir1     
+20	dir1
+➜  KodeKloud du -sh dir1
+20K	dir1
+➜  KodeKloud ls -lh dir1 
+total 8.0K
+drwxr-xr-x 2 maryse maryse 4.0K Oct  6 06:53 sub_dir1
+drwxr-xr-x 2 maryse maryse 4.0K Oct  6 06:55 sub_dir2
+➜  KodeKloud  cd dir
+cd: no such file or directory: dir
+➜  KodeKloud cd dir1/sub_dir1 
+➜  sub_dir1 ls
+kode1.txt  kode2.txt
+➜  sub_dir1 tar -cf kode.tar kode1.txt kode2.txt 
+➜  sub_dir1 ls
+kode1.txt  kode2.txt  kode.tar
+➜  sub_dir1 gzip kode.tar 
+➜  sub_dir1 bzip kode.tar
+zsh: command not found: bzip
+➜  sub_dir1 bzip2 kode.tar
+bzip2: Can't open input file kode.tar: No such file or directory.
+➜  sub_dir1 bzip2 kode1.txt 
+➜  sub_dir1 gzip kode1.txt
+gzip: kode1.txt: No such file or directory
+➜  sub_dir1 ls
+kode1.txt.bz2  kode2.txt  kode.tar.gz
+➜  sub_dir1 xz kode2.txt
+➜  sub_dir1 ls
+kode1.txt.bz2  kode2.txt.xz  kode.tar.gz
+➜  sub_dir1 zcat kode.tar.gz 
+kode1.txt0000644000175000017500000000014215070645452012211 0ustar  marysemarysesome text
+cant create directories and parent directories only from the home dir
+mkdir -p /home/~/~kode2.txt0000644000175000017500000000013315070645654012216 0ustar  marysemarysesome text
+if you want to create a directory in the current dir use
+mkdir -p ./dir1/sub_dir1%                                                       ➜  sub_dir1 zcat kode1.txt.bz2 
+
+gzip: kode1.txt.bz2: not in gzip format
+➜  sub_dir1 xzcat kode2.txt.xz
+some text
+if you want to create a directory in the current dir use
+mkdir -p ./dir1/sub_dir1%                                                       ➜  sub_dir1 #zcat, bzcat,xzcat allows you to read compressend files without uncompressing them
+➜  sub_dir1 locate d2l-en.pdf
+/home/maryse/Documents/Training/pytorch/d2l-en.pdf
+➜  sub_dir1 gunzip kode.tar.gz 
+➜  sub_dir1 unxz kode2.txt.xz 
+➜  sub_dir1 bunzip2 kode1.txt.bz2 
+➜  sub_dir1 ls
+kode1.txt  kode2.txt  kode.tar
+➜  sub_dir1 grep some kode1.txt 
+some text
+➜  sub_dir1 grep -r some .              
+./kode2.txt:some text
+grep: ./kode.tar: binary file matches
+./kode1.txt:some text
+➜  sub_dir1 grep -i SOME  kode1.txt
+some text
+➜  sub_dir1 man find
+➜  sub_dir1  grep -w som kode1.txt 
+➜  sub_dir1  grep  som kode1.txt 
+some text
+➜  sub_dir1  cat > premier_league.txt
+1 Arsenal
+2 Liverpool
+3 Chelsea
+4 Manchester City
+➜  sub_dir1 grep -A1 Arsenal
+
+
+  ls
+  326  tar -c /home/bob/reptile/snake/python/
+  327  tar -cf  /home/bob/reptile/snake/python.tar /home/bob/reptile/snake/python/
+  328  cd /home/bob/r
+  329  cd /home/bob/reptile/snake/
+  330  ls
+  331  tar -tf python.tar 
+  332  gzip python.tar 
+  333  ls
+  334  cp python.tar.gz ../../
+  335  cd ../..
+  336  ls
+  337  gunzip /home/bob/birds/eagle/eaglet.dat.gz 
+  338  ls /home/bob/birds/eagle/
+  339  locate caleston-code
+  340  locale caleston-code
+  341  find /opt/ -name caleston-code
+  342  find /etc dummy.service
+  343  find /etc -name dummy.service
+  344  echo find /etc -name dummy.service >> /home/bob/dummy-service
+  345  cd dummy-service 
+  346  cat dummy-service 
+  347  echo " find /etc -name dummy.service" > /home/bob/dummy-service
+  348  cat dummy-service 
+  349  echo " find /etc -name dummy.service" 2> /home/bob/dummy-service
+  350  cat dummy-service 
+  351  echo /etc/systemd/system/dummy.service > /home/bob/dummy-service
+  352  cat dummy-service 
+  353  grep -r 172.16.238.197 /etc
+  354  echo /etc/random_ip.conf > /home/bob/ip
+  355  cat ip 
+  356  echo a file in my home directory > /home/bob/file_with_data.txt
+  357  cat file_with_data.txt 
+  358  pyrhon3 /home/bob/my_python_test.py
+  359  python3 /home/bob/my_python_test.py
+  360  echo python3 /home/bob/my_python_test.py 2> /home/bob/py_error.txt
+  361  cat py_error.txt 
+  362  echo " python3 /home/bob/my_python_test.py" 2> /home/bob/py_error.txt
+  363  cat py_error.txt 
+  364  echo " python3 /home/bob/my_python_test.py 2> /home/bob/py_error.txt
+  365  python3 /home/bob/my_python_test.py 2> /home/bob/py_error.txt
+  366  cat py_error.txt 
+  367  zcat /usr/share/man/man1/tail.1.gz 
+  368  zcat /usr/share/man/man1/tail.1.gz > /home/bob/pipes
+  369  cat /home/bob/pipes 
+
+    1  history
+    2  cd Documents/Training/Linux_training/KodeKloud
+    3  mkdir -p /dir1/sub_dir1/
+    4  ls
+    5  mkdir -p /dir1/sub_dir1
+    6  sudo mkdir -p /dir1/sub_dir1
+    7  ls
+    8  cd
+    9  mkdir -p /home/maryse/Documents/Training/Linux_training/KodeKloud/dir1/sub_dir1
+   10  cd Documents/Training/Linux_training/KodeKloud
+   11  ls
+   12  cd dir1/sub_dir1
+   13  cd ..
+   14  touch dir1/sub_dir1/kode1.txt
+   15  cd dir1/sub_dir1/
+   16  la
+   17  cat > kode1.txt
+   18  cat > kode2.txt
+   19  cd ../..
+   20  mkdir ./dir1/sub_dir2
+   21  ls
+   22  cd dir1
+   23  ls
+   24  cd ..
+   25  du -sk dir1
+   26  du -sh dir1
+   27  ls -lh dir1
+   28  cd dir1/sub_dir1
+   29  ls
+   30  tar -cf kode.tar kode1.txt kode2.txt
+   31  ls
+   32  gzip kode.tar
+   33  bzip kode.tar
+   34  bzip2 kode.tar
+   35  bzip2 kode1.txt
+   36  gzip kode1.txt
+   37  ls
+   38  xz kode2.txt
+   39  ls
+   40  zcat kode.tar.gz
+   41  zcat kode1.txt.bz2
+   42  xzcat kode2.txt.xz
+   43  #zcat, bzcat,xzcat allows you to read compressend files without uncompressing them
+   44  locate d2l-en.pdf
+   45  gunzip kode.tar.gz
+   46  unxz kode2.txt.xz
+   47  bunzip2 kode1.txt.bz2
+   48  ls
+   49  grep some kode1.txt
+   50  grep -r some .
+   51  grep -i SOME  kode1.txt
+   52  man find
+   53  grep -A1 Arsenal
+   54  grep -A1 Arsenal premier_league.txt
+   55  grep -A2 Arsenal  premier_league.txt
+   56  grep -B1 Liverpool  premier_league.txt
+   57  grep -B1 Chelsea -A1 Liverpool  premier_league.txt
+   58  grep -B1-A1 Liverpool  premier_league.txt
+   59  grep -B1 -A1 Liverpool  premier_league.txt
+   60  man less
+   61  seq 1000 > longfile.txt
+   62  for i in {1..100}; do echo "This is line number $i" >> longfile.txt; done\n
+   63  less longfile.txt
+   64  for i in {1..100}; do echo "This is line number $i" > longfile.txt; done\n
+   65  less longfile.txt
+   66  for i in {1..100}; do echo "This is line number $i" >> longfile.txt; done\n
+   67  less longfile.txt
+   68  #IO redirection
+   69  cat > sample_txt
+   70  echo $SHELL > shell.txt
+   71  cat shell.txt
+   72  echo "this is the z shell" >> shell.txt # in oder to append use >>
+   73  cat shell.txt
+   74  cat missing_file 2> error.txt#Redirect just the error message
+   75  cat missing_file 2> error.txt #Redirect just the error message
+   76  cat error.txt
+   77  cat missing_file 2>> shell.txt
+   78  cat shell.txt
+   79  cat sample_txt 
+   80  cat >> sample_txt 
+   81  cat sample_txt 
+   82  grep -i Hello sample_txt > file.txt
+   83  cat file.txt
+   84  less file.txt
+   85  grep -i NUMBER longfile.txt | less  #command line pipes command1| command2\n
+   86  echo $SHELL | tee shell.txt
+   87  echo "this is some new text line" | tee -a shell.txt
+   88  cat shell.txt

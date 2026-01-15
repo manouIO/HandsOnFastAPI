@@ -1,4 +1,4 @@
-../Databases/
-../SQL_queries/
+/Databases/
+/SQL_queries/
 __pycache__/
-../venv/
+/venv/

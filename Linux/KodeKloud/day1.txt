@@ -1,0 +1,482 @@
+  206  exit
+  207  cd Documents/
+  208  ls
+  209  cd Training/
+  210  ls
+  211  ls -l
+  212  ls -al
+  213  ls -LS
+  214  ls -1
+  215  ls -la
+  216  la -al
+  217  ls -al
+  218  ls -lh
+  219  ls -ltr
+  220  ls /bin
+  221  hostname
+  222  username
+  223  cd
+  224  man ls
+  225  ls --help
+  226  type echo
+  227  type ls
+  228  type man
+  229  type cd
+  230  history > Documents/Training/Linux_training/Topic1/day1.txt
+  231  man touch
+  232  man echo
+  233  echo $set_1
+  234  echo set_1
+  235  cd Documents/Training/
+  236  pwd
+  237  ls -l
+  238  mkdir practice
+  239  cd practice/
+  240  greetings='Hello world'
+  241  cd
+  242  ls -a
+  243  type echo
+  244  echo 'Hello $user'
+  245  echo "Hello $user"
+  246  echo "Hello $USER"
+  247  echo date
+  248  echo $date
+  249  echo $DATE
+  250  echo $now
+  251  echo $(date)
+  252  touch text.txt
+  253  ls
+  254  echo i am hungry > text.txt
+  255  vim text.txt 
+  256  echo 'Set1: Basic Level'
+  257  pwd
+  258  ls -l
+  259  mkdir practice
+  260  ls 
+  261  greeting='Hello world'
+  262  echo greeting
+  263  echo $greeting
+  264  cd Documents/Training/
+  265  cd
+  266  ls -a
+  267  type echo
+  268  echo 'Hello $USER$'
+  269  echo "Hello $USER"
+  270  echo ($date)
+  271  echo (date)
+  272  echo $(date)
+  273  touch test.txt
+  274  echo good morning >text.txt
+  275  echo good morning >test.txt
+  276  vim test.txt 
+  277  rm test.txt 
+  278  ls --help
+  279  touch example.txt
+  280  ls -l example.txt 
+  281  echo "hello world"> example.txt 
+  282  chmod +rw example.txt 
+  283  ls -l example.txt 
+  284  chmod +x example.txt 
+  285  ls -l example.txt 
+  286  vim example.txt 
+  287  history >day_2.txt
+  288  pwd
+  289  username
+  290  echo $username
+  291  echo $USERNAME
+  292  echo $
+  293  echo $BASH_VERSION
+  294  echo $
+  295  echo $SHELL
+  296  echo $HOSTNAME
+  297  echo $PATH
+  298  python
+  299  ls -l
+  300  mv day_2.txt Documents/Training
+  301  mv example.txt Documents/Training
+  302  cd Documents/Training/
+  303  ls
+  304  greeting='hello world'
+  305  echo $greeting
+  306  echo 'bonsoir nana' >mentissa.txt
+  307  ls
+  308  vim mentissa.txt 
+  309  cat mentissa.txt 
+  310  cat > rock.txt
+  311  cat mentissa.txt 
+  312  cat rock.txt 
+  313  type echo
+  314  type mkdir
+  315  type cd
+  316  type ls
+  317  echo 'hello $USER'
+  318  echo "hello $USER"
+  319  ls
+  320  cat day_2.txt 
+  321  cd Documents/Training/
+  322  touch game{1..5}
+  323  ls
+  324  rm game?
+  325  ls
+  326  echo $TZ
+  327  echo $
+  328  TZ=EST date
+  329  TZ=GMT date
+  330  env
+  331  TZ date
+  332  man TZ
+  333  mkdir parent/child/grandchild
+  334  ls 
+  335  man mkdir
+  336  mkdir -p parent/child/grandchild
+  337  ls 
+  338  man rm
+  339  man rmdir
+  340  rmdir parent/child/grandchild/
+  341  type cd
+  342  ls
+  343  cd parent/child/
+  344  ls
+  345  man rmdir
+  346  rmdir -p parent/child
+  347  cd ..
+  348  rmdir -p parent/child
+  349  mkdir -p day3/set2/exercice
+  350  touch meukem.txt >day3/set2/exercice/
+  351  touch meukem.txt
+  352  touch meukem.txt day3/set2/exercice/
+  353  cd day3/set2/exercice/
+  354  ls
+  355  cd ....
+  356  cd ..
+  357  cd
+  358  cd Documents/Training/
+  359  mv meukem.txt day3/set2/exercice/
+  360  ln -s day3/set2/exercice/meukem.txt meukem.txt
+  361  ls
+  362  man ln
+  363  man ll
+  364  ll
+  365  ls -l
+  366  cat meukem.txt 
+  367  echo i love you>meukem.txt
+  368  cat meukem.txt 
+  369  ls
+  370  ls -l
+  371  df
+  372  du
+  373  ls.| wc -l
+  374  ls| wc -l
+  375  wc -l
+  376  ln -s link.txt day3/set2/exercice/meukem.txt 
+  377  rm meukem.txt 
+  378  ln -s link.txt day3/set2/exercice/meukem.txt 
+  379  ln -s  day3/set2/exercice/meukem.txt link.txt
+  380  ls
+  381  ls -l
+  382  cat link.txt 
+  383  echo link.txt 
+  384  vim link.txt 
+  385  cat link.txt 
+  386  cat > Text1.txt
+  387  cat Text1.txt 
+  388  cat > Text2.txt
+  389  cp Text1.txt Text2.txt 
+  390  cat Text2.txt 
+  391  mv day3/set2/exercice/meukem.txt 
+  392  man mv
+  393  mv -t day3/set2/exercice/meukem.txt 
+  394  man mv
+  395  mv -T day3/set2/exercice/meukem.txt 
+  396  mv day3/set2/exercice/meukem.txt .
+  397  ls
+  398  mkdir -p mama/nana/meukem
+  399  rmdir -p mama
+  400  rmdir -p mama/nana/meukem/
+  401  cd ..
+  402  cd Training/
+  403  now= $(date)
+  404  now= $(/date)
+  405  now= $/(date)
+  406  $date
+  407  echo $date
+  408  echo $(date)
+  409  now= (date)
+  410  now=(date)
+  411  echo $now
+  412  echo "$now"
+  413  now=$(date)
+  414  echo now
+  415  echo "now"
+  416  echo "$now"
+  417  now=(date)
+  418  echo "$now"
+  419  now=$(date)
+  420  echo "$now"
+  421  My_var=meukem
+  422  export My_var
+  423  cd ..
+  424  echo I love $My_var
+  425  cd Training/
+  426  ps -e
+  427  ps -A
+  428  cat >info.txt
+  429  grep 'you' info.txt
+  430  man grep
+  431  grep -e 'you' info.txt
+  432  grep -f 'you' info.txt
+  433  grep -e 'you' info.txt
+  434  chmod +rw info.txt 
+  435  df
+  436  df -h
+  437  df -a
+  438  head 3 info.txt 
+  439  man head
+  440  head -3 info.txt 
+  441  man head
+  442  tail -2 info.txt 
+  443  echo $PATH 
+  444  alias ll="ls -al"
+  445  ll
+  446  vim ~/.bashrc
+  447  history >day4.txt
+  448  cat > test.py
+  449  python test.py
+  450  /usr/bin/python test.py
+  451  /bin/python test.py
+  452  echo $PATH 
+  453  which code
+  454  which mkdir
+  455  cat> rock.sh
+  456  vim rock.sh 
+  457  bash rock.sh 
+  458  cd ..
+  459  bash rock.sh 
+  460  cd Training/
+  461  which rock.sh
+  462  rock.sh
+  463  export PATH=$PATH:/home/Documents/Training
+  464  echo $PATH 
+  465  rock.sh
+  466  ls
+  467  chmod +x rock.sh 
+  468  rock.sh
+  469  chmod u+x rock.sh 
+  470  rock.sh
+  471  cd ..
+  472  bash rock.sh 
+  473  cd Training/
+  474  vim rock.sh
+  475  exit
+  476  ls
+  477  cat manou.txt
+  478  touch manou.txt
+  479  ls
+  480  chmod +x
+  481  chmod +x manou.txt 
+  482  ls
+  483  rm manou.txt 
+  484  ls
+  485  cd ../..
+  486  ls
+  487  cd ..
+  488  ls
+  489  find . -type f -name rm
+  490  find . -type f -name *rm
+  491  which rm
+  492  which python
+  493  conda env
+  494  conda env list
+  495  ls /home/maryse/miniconda3/envs/data_prep
+  496  ls /home/maryse/miniconda3/envs/data_prep/bin
+  497  which pip
+  498  which -a pip
+  499  which -a python
+  500  which python
+  501  exit
+  502  ls
+  503  cd ..
+  504  ls
+  505  ls bin
+  506  ls
+  507  ls boot
+  508  exit
+  509  cd Documents/Training/
+  510  ls
+  511  bash rock.sh
+  512  rock.sh
+  513  echo $PATH
+  514  export PATH=$PATH:/home/maryse/Documents/Training
+  515  echo $PATH
+  516  rock.sh
+  517  cat >nana.py
+  518  mv nana.py /home/maryse/Downloads
+  519  vim rock.sh 
+  520  rock.sh
+  521  cat day4.txt 
+  522  find nana.py
+  523  find /home/maryse/ -type f -name 
+  524  find /home/maryse/ -type f -name *nana.py
+  525  find /home/maryse/ -type f -name *rock
+  526  find /home/maryse/ -type f -name rock*
+  527  EST date
+  528  date
+  529  TZ=date
+  530  echo $TZ
+  531  TZ=$date
+  532  echo $TZ
+  533  TZ=$(date)
+  534  echo $TZ
+  535  du
+  536  cd Documents/Training/
+  537  du
+  538  du .
+  539  du /home/maryse/Documents/Training/
+  540  ls
+  541  grep "you" info.txt 
+  542  grep "*you" info.txt 
+  543  man grep
+  544  cd Documents/Training/
+  545  mkdir dir1 dir2
+  546  ls
+  547  man tar
+  548  tar -cvf dir1.tar dir1/
+  549  tar -cvf dir2.tar dir2/
+  550  ls
+  551  tar -czvf archive.tar.gz meukem.txt rmycommand.txt rock.txt
+  552  tar -czvf archive.tar.gz meukem.txt mycommand.txt rock.txt
+  553  tar -xzvf archive.tar.gz 
+  554  crontab -l
+  555  crontab -e
+  556  export PATH=$PATH: /usr/local/bin
+  557  greet_user()  echo "Hello $USERNAME"
+  558  greet_user() { echo "Hello $USERNAME"}
+  559  greet_user(){ echo "Hello $USERNAME"}; 
+  560  man passwd
+  561  man 5 passwd
+  562  locate rock
+  563  locate day
+  564  locate training
+  565  find rock
+  566  find -rock
+  567  cd Documents/Training/
+  568  find -rock
+  569  man find
+  570  find -name rock
+  571  find -path rock
+  572  man cat
+  573  man wc
+  574  man grep
+  575  man tr
+  576  man sort
+  577  cd .
+  578  pwd
+  579  cd Documents/Training/
+  580  ls
+  581  cd ./Linux_training/
+  582  cd ..
+  583  cd ~
+  584  cd -
+  585  rfkill list
+  586  sudo rfkill unblock bluetooth
+  587  bluetoothct1
+  588  lsusb
+  589  sudo apt install usbutils
+  590  lsusb
+  591  sudo apt install bluez
+  592  sudo apt install blueman
+  593  sudo systemct1 enable bluetooth.service
+  594  sudo apt-get install systemd
+  595  clear
+  596  ls
+  597  clear
+  598  history
+  599  exit
+  600  history
+  601  delete
+  602  clear
+  603  echo 'my name is Manou and I have two kids '
+  604  cat 'my name is Manou and I have two kids '> manou_001.sh
+  605  touch manou_001.sh
+  606  ls
+  607  cat manou_001.sh 
+  608  cd Documents/Training/
+  609  ls
+  610  cd Linux_training/
+  611  ls
+  612  cd Missing_semester/
+  613  ls
+  614  touch manou_001.sh 
+  615  which bash
+  616  vim manou_001.sh 
+  617  cat manou_001.sh 
+  618  vim manou_001.sh 
+  619  cat manou_001.sh 
+  620  bash manou_001.sh 
+  621  vim manou_001.sh 
+  622  bash manou_001.sh 
+  623  vim manou_001.sh 
+  624  bash manou_001.sh 
+  625  vim manou_001.sh 
+  626  bash manou_001.sh 
+  627  pwd
+  628  vim manou_002.sh
+  629  bash manou_002.sh 
+  630  vim manou_002.sh
+  631  bash manou_002.sh 
+  632  vim manou_002.sh
+  633  cat i love you> love.txt
+  634  cat 'i love you'> love.txt
+  635  cat  love.txt
+  636  cat > love.txt
+  637  vim manou_002.sh
+  638  bash manou_002.sh 
+  639  ls
+  640  cd my_directory/
+  641  cd --
+  642  cd -
+  643  cd ..
+  644  vim manou_002.sh
+  645  bash manou_002.sh 
+  646  rmdir my_directory/
+  647  cd my_directory/
+  648  ls
+  649  cat info.txt 
+  650  cd ..
+  651  vim manou_002.sh
+  652  man wc
+  653  vim manou_002.sh
+  654  bash manou_002.sh 
+  655  ls
+  656  vim manou_002.sh
+  657  bash manou_002.sh 
+  658  cd my_directory/
+  659  pwd
+  660  vim manou_002.sh
+  661  cd ..
+  662  vim manou_002.sh
+  663  bash manou_002.sh 
+  664  vim manou_002.sh
+  665  bash manou_002.sh 
+  666  vim manou_002.sh
+  667  bash manou_002.sh 
+  668  vim manou_002.sh
+  669  bash manou_002.sh 
+  670  vim manou_002.sh
+  671  bash manou_002.sh 
+  672  vim manou_002.sh
+  673  bash manou_002.sh 
+  674  vim manou_002.sh
+  675  bash manou_002.sh 
+  676  vim system_info.sh
+  677  bash system_info.sh
+  678  ls
+  679  cat process.txt 
+  680  vim user_input.sh
+  681  bash user_input.sh
+  682  vim user_input.sh
+  683  bash user_input.sh
+  684  vim user_input.sh
+  685  bash user_input.sh
+  686  man if
+  687  history >day1.txt

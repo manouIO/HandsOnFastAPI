@@ -48,4 +48,4 @@ class Token(BaseModel):
 
 #Schema for Token Data
 class TokenData(BaseModel):
-    id: Optional[str] = None
+    id: Optional[str] = None # or Optional[int] depending on your user id type

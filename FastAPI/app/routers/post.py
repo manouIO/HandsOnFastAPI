@@ -18,26 +18,22 @@ router = APIRouter(
 #      return {"message": "Welcome to my FastAPI application!!!!!!"}
 
 
-@router.post("/")
-def create_posts(new_post:schemas.PostCreate):
-     print(new_post.title)
-     return {new_post.title} #returning the pydantic model instance directly
-
+#
 # Best CRUD practices for URLs
 # Create - POST - /posts
 # Read - GET - /posts or /posts/{id}
 # Update - PUT - /posts/{id} or PATCH - /posts/{id}
 # Delete - DELETE - /posts/{id}
 
-my_posts = [{"title": "First Post", "content": "Content of the first post", "id": 1},
-            {"title": "favorite food", "content": "I like pizza", "id": 2}]
+# my_posts = [{"title": "First Post", "content": "Content of the first post", "id": 1},
+#             {"title": "favorite food", "content": "I like pizza", "id": 2}]
 
      
 #Create a post method using SQLAlchemy
 @router.post("/",status_code=status.HTTP_201_CREATED,response_model=schemas.Post)
 def create_post_sqlalchemy(post: schemas.PostCreate, 
                            db: Session = Depends(get_db), 
-                           get_current_user: int = Depends(oauth2.get_current_user)): 
+                           user_id: int = Depends(oauth2.get_current_user)): 
     print(post.model_dump())
     db_post = models.Post_alchemy(**post.model_dump()) #unpacking the post dictionary to match the model fields
     db.add(db_post)
@@ -57,17 +53,17 @@ def create_post_sqlalchemy(post: schemas.PostCreate,
 
 #now let's create a path operation to get a specific post by id
 
-def find_post(id:int):
-    for post in my_posts:
-        if post['id'] == id:
-            return post
+# def find_post(id:int):
+#     for post in my_posts:
+#         if post['id'] == id:
+#             return post
         
 
  #Path order matters, specific paths should be defined before dynamic paths, eg
-@router.get("/latest")
-def get_latest_post():
-    latest_post = my_posts[-1]
-    return {"latest_post": latest_post}
+# @router.get("/latest")
+# def get_latest_post():
+#     latest_post = my_posts[-1]
+#     return {"latest_post": latest_post}
        
 #get all posts method with SQLAlchemy
 @router.get("/",response_model=List[schemas.Post])
@@ -90,10 +86,10 @@ def get_post_sqlalchemy(id:int, db: Session = Depends(get_db)):
 
 #now let's create a path operation to delete a specific post by id
 
-def find_post_index(id:int):
-    for index, post in enumerate(my_posts):
-        if post['id'] == id:
-            return index
+# def find_post_index(id:int):
+#     for index, post in enumerate(my_posts):
+#         if post['id'] == id:
+#             return index
 
 
 #delete a post by id using SQLAlchemy

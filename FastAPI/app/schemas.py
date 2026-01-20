@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
+from typing import Optional
 
 #title str, content str,  do not add anything else
 # using pydantic models for data validation
@@ -35,3 +36,16 @@ class User(BaseModel):
     # class Config: #we want to work with ORM objects
     #     orm_mode = True
     model_config = {"from_attributes": True}
+
+#Schema for User login
+class UserLogin(UserCreate):
+    pass
+
+#Schema for Token
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+#Schema for Token Data
+class TokenData(BaseModel):
+    id: Optional[str] = None

@@ -3,18 +3,22 @@ from typing import  List
 from app import models, schemas, utils
 from sqlalchemy.orm import Session
 from ..database import  get_db
+from .. import oauth2
 
-router = APIRouter()
-
-
-
-# path operation
-@router.get("/")  #get request, there are other methods like post, put, delete
-async def root(): #async is used for asynchronous programming, but not mandatory
-     return {"message": "Welcome to my FastAPI application!!!!!!"}
+router = APIRouter(
+    prefix="/sqlalchemy/posts", #all routes in this file will have /sqlalchemy/posts as prefix
+    tags=["SQLAlchemy Posts"] #grouping the routes under this tag in the docs
+)
 
 
-@router.post("/createposts")
+
+# # path operation
+# @router.get("/")  #get request, there are other methods like post, put, delete
+# async def root(): #async is used for asynchronous programming, but not mandatory
+#      return {"message": "Welcome to my FastAPI application!!!!!!"}
+
+
+@router.post("/")
 def create_posts(new_post:schemas.PostCreate):
      print(new_post.title)
      return {new_post.title} #returning the pydantic model instance directly
@@ -30,8 +34,10 @@ my_posts = [{"title": "First Post", "content": "Content of the first post", "id"
 
      
 #Create a post method using SQLAlchemy
-@router.post("/sqlalchemy/posts",status_code=status.HTTP_201_CREATED,response_model=schemas.Post)
-def create_post_sqlalchemy(post: schemas.PostCreate, db: Session = Depends(get_db)):
+@router.post("/",status_code=status.HTTP_201_CREATED,response_model=schemas.Post)
+def create_post_sqlalchemy(post: schemas.PostCreate, 
+                           db: Session = Depends(get_db), 
+                           get_current_user: int = Depends(oauth2.get_current_user)): 
     print(post.model_dump())
     db_post = models.Post_alchemy(**post.model_dump()) #unpacking the post dictionary to match the model fields
     db.add(db_post)
@@ -58,13 +64,13 @@ def find_post(id:int):
         
 
  #Path order matters, specific paths should be defined before dynamic paths, eg
-@router.get("/posts/latest")
+@router.get("/latest")
 def get_latest_post():
     latest_post = my_posts[-1]
     return {"latest_post": latest_post}
        
 #get all posts method with SQLAlchemy
-@router.get("/sqlalchemy/posts",response_model=List[schemas.Post])
+@router.get("/",response_model=List[schemas.Post])
 def test_sqlalchemy(db: Session = Depends(get_db)):
     posts = db.query(models.Post_alchemy).all()
     return posts
@@ -72,7 +78,7 @@ def test_sqlalchemy(db: Session = Depends(get_db)):
 
 
 # get one post by id using SQLAlchemy
-@router.get("/sqlalchemy/posts/{id}",response_model=schemas.Post)
+@router.get("/{id}",response_model=schemas.Post)
 def get_post_sqlalchemy(id:int, db: Session = Depends(get_db)):
     post = db.query(models.Post_alchemy).filter(models.Post_alchemy.id == id).first()
     if not post:
@@ -91,7 +97,7 @@ def find_post_index(id:int):
 
 
 #delete a post by id using SQLAlchemy
-@router.delete("/sqlalchemy/posts/{id}",status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{id}",status_code=status.HTTP_204_NO_CONTENT)
 def delete_post_sqlalchemy(id:int, db: Session = Depends(get_db)):
     post = db.query(models.Post_alchemy).filter(models.Post_alchemy.id == id)
     if post.first() is None:
@@ -103,7 +109,7 @@ def delete_post_sqlalchemy(id:int, db: Session = Depends(get_db)):
 
 
 #update a post by id using SQLAlchemy
-@router.put("/sqlalchemy/posts/{id}",status_code=status.HTTP_200_OK,response_model=schemas.Post)
+@router.put("/{id}",status_code=status.HTTP_200_OK,response_model=schemas.Post)
 def update_post_sqlalchemy(id:int, updated_post: schemas.PostCreate, db: Session = Depends(get_db)):
     post_query = db.query(models.Post_alchemy).filter(models.Post_alchemy.id == id)
     post = post_query.first()

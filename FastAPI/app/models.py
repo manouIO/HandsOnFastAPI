@@ -1,7 +1,8 @@
 from .database import Base
 from sqlalchemy import  Column, Integer, String, Boolean
 from sqlalchemy.sql.sqltypes import TIMESTAMP
-from sqlalchemy.sql.expression import null,text
+from sqlalchemy.sql.expression import null, text
+from sqlalchemy.orm import Mapped, mapped_column
 
 class Post_alchemy(Base):
     __tablename__ = "social_media_posts_alchemy"
@@ -15,7 +16,7 @@ class Post_alchemy(Base):
 class User_alchemy(Base):
     __tablename__ = "users_alchemy"
 
-    id = Column(Integer, primary_key=True, nullable=False)
-    email = Column(String, nullable=False, unique=True) #ensure unique emails and prevent null values
-    password = Column(String, nullable=False) # no need for unique passwords
-    created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, nullable=False)
+    email: Mapped[str] = mapped_column(String, nullable=False, unique=True)
+    password: Mapped[str] = mapped_column(String, nullable=False)
+    created_at: Mapped[int] = mapped_column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))

@@ -8,7 +8,7 @@ import psycopg2 #postgres database adapter
 from app import models, schemas, utils
 from sqlalchemy.orm import Session
 from .database import engine, SessionLocal, get_db
-from .routers import post, user
+from .routers import post, user, auth
 
 models.Base.metadata.create_all(bind=engine) #create the database tables
 
@@ -18,3 +18,4 @@ app=FastAPI() #fastapi instance
   
 app.include_router(post.router) #include the post router
 app.include_router(user.router) 
+app.include_router(auth.router) #include the auth router

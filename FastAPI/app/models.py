@@ -27,3 +27,10 @@ class Post_alchemy(Base):
 
     owner=relationship("User_alchemy")  #establishing relationship between User and Post models
     #to access the user who created the post
+
+#Create a Vote model to represent the votes table
+class Vote_alchemy(Base):
+    __tablename__ = "votes"
+
+    user_id : Mapped[int]= mapped_column(Integer, ForeignKey("users_alchemy.id",ondelete="CASCADE"), primary_key=True)
+    post_id : Mapped[int]= mapped_column(Integer, ForeignKey("posts.id",ondelete="CASCADE"), primary_key=True)

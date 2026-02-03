@@ -1,7 +1,8 @@
 from fastapi import FastAPI, HTTPException, Response,status, Depends, APIRouter
-from typing import  List
+from typing import  List, Optional
 from app import models, schemas, utils
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 from ..database import  get_db
 from .. import oauth2
 
@@ -67,26 +68,49 @@ def create_post_sqlalchemy(post: schemas.PostCreate,
 #     return {"latest_post": latest_post}
        
 #get all posts method with SQLAlchemy
-@router.get("/",response_model=List[schemas.Post])
-def test_sqlalchemy(db: Session = Depends(get_db),
-                    current_user: models.User_alchemy = Depends(oauth2.get_current_user)):
-    posts = db.query(models.Post_alchemy).all()
+@router.get("/", response_model=List[schemas.PostOut])
+def get_all_posts_sqlalchemy(db: Session = Depends(get_db),
+                    current_user: models.User_alchemy = Depends(oauth2.get_current_user), #to get the current logged in user
+                    limit: int = 10, skip: int = 0, search: Optional[str]=""): # to implement pagination
+    
+    # posts = (db.query(models.Post_alchemy)
+    #          .filter(models.Post_alchemy.
+    #                  title.contains(search))
+    #                  .limit(limit)
+    #                  .offset(skip).all()) #db.query(models.Post_alchemy).all()
+    
+    posts=db.query(models.Post_alchemy, func.count(models.Vote_alchemy.post_id).label("votes"))\
+        .join(models.Vote_alchemy, models.Post_alchemy.id == models.Vote_alchemy.post_id, isouter=True)\
+        .group_by(models.Post_alchemy.id)\
+        .filter(models.Post_alchemy\
+                     .title.contains(search))\
+                     .limit(limit)\
+                     .offset(skip).all()
+
+    #return [{"post": post, "votes": votes} for post, votes in results] #because results is a list of tuples (post, votes) and we need to convert it to a list of dictionaries
     return posts
 
+
 #get all posts of the current logged in user with SQLAlchemy
-@router.get("/my_posts",response_model=List[schemas.Post])
+@router.get("/my_posts",response_model=List[schemas.PostOut])
 def get_my_posts_sqlalchemy(db: Session = Depends(get_db),
                            current_user: models.User_alchemy = Depends(oauth2.get_current_user)):   
-    posts = db.query(models.Post_alchemy).filter(models.Post_alchemy.owner_id == current_user.id).all()
+    posts = db.query(models.Post_alchemy, func.count(models.Vote_alchemy.post_id).label("votes"))\
+        .join(models.Vote_alchemy, models.Post_alchemy.id == models.Vote_alchemy.post_id, isouter=True)\
+        .group_by(models.Post_alchemy.id)\
+            .filter(models.Post_alchemy.owner_id == current_user.id).all()
     return posts
 
 
 
 # get one post by id using SQLAlchemy
-@router.get("/{id}",response_model=schemas.Post)
+@router.get("/{id}",response_model=schemas.PostOut)
 def get_post_sqlalchemy(id:int, 
                         db: Session = Depends(get_db)):
-    post = db.query(models.Post_alchemy).filter(models.Post_alchemy.id == id).first()
+    post = db.query(models.Post_alchemy, func.count(models.Vote_alchemy.post_id).label("votes"))\
+        .join(models.Vote_alchemy, models.Post_alchemy.id == models.Vote_alchemy.post_id, isouter=True)\
+        .group_by(models.Post_alchemy.id)\
+        .filter(models.Post_alchemy.id == id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                              detail=f"post with id: {id} was not found")

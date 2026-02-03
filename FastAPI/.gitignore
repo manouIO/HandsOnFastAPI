@@ -2,3 +2,4 @@
 /SQL_queries/
 __pycache__/
 /venv/
+.env

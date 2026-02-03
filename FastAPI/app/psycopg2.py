@@ -1,11 +1,10 @@
 import time 
 from fastapi import FastAPI, HTTPException, Response,status
 #from fastapi.params import Body
-from pydantic import BaseModel
 from typing import List
 import psycopg2 #postgres database adapter
 from psycopg2.extras import RealDictCursor #to get the column names along with the data
-from app import models, schemas, utils
+from app import schemas
 from .database import engine, SessionLocal, get_db
 
 

@@ -6,7 +6,7 @@ from sqlalchemy.sql.expression import null, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import datetime
 
-
+####  JUST FOR FUN ====
 class User(Base):
     __tablename__ = "users"
 

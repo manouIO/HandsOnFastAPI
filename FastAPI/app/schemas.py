@@ -36,7 +36,7 @@ class Post(PostBase):
 
 #Let's create a schema for the post response model with votes
 class PostOut(BaseModel):
-    Post_alchemy: Post #we must use a label in the db.query to avoid confusion because the original name is Post_alchemy
+    Post: Post #we must use a label in the db.query to avoid confusion because the original name is Post
     votes: int
 
     class Config:

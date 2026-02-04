@@ -34,10 +34,10 @@ router = APIRouter(
 @router.post("/",status_code=status.HTTP_201_CREATED,response_model=schemas.Post)
 def create_post_sqlalchemy(post: schemas.PostCreate, 
                            db: Session = Depends(get_db), 
-                           current_user: models.User_alchemy= Depends(oauth2.get_current_user)): 
+                           current_user: models.User= Depends(oauth2.get_current_user)): 
     print(current_user.email)
     print(post.model_dump())
-    db_post = models.Post_alchemy(owner_id=current_user.id,**post.model_dump()) #unpacking the post dictionary to match the model fields
+    db_post = models.Post(owner_id=current_user.id,**post.model_dump()) #unpacking the post dictionary to match the model fields
     db.add(db_post)
     db.commit()
     db.refresh(db_post)  #to get the updated instance with the generated ID
@@ -45,7 +45,7 @@ def create_post_sqlalchemy(post: schemas.PostCreate,
 
 # @router.post("/sqlalchemy/posts",status_code=status.HTTP_201_CREATED)
 # def create_post_sqlalchemy(post: schemas.PostCreate, db: Session = Depends(get_db)):
-#     db_post = models.Post_alchemy(title=post.title, content=post.content, published=post.published)
+#     db_post = models.Post(title=post.title, content=post.content, published=post.published)
 #     db.add(db_post)
 #     db.commit()
 #     db.refresh(db_post)  #to get the updated instance with the generated ID
@@ -70,19 +70,19 @@ def create_post_sqlalchemy(post: schemas.PostCreate,
 #get all posts method with SQLAlchemy
 @router.get("/", response_model=List[schemas.PostOut])
 def get_all_posts_sqlalchemy(db: Session = Depends(get_db),
-                    current_user: models.User_alchemy = Depends(oauth2.get_current_user), #to get the current logged in user
+                    current_user: models.User = Depends(oauth2.get_current_user), #to get the current logged in user
                     limit: int = 10, skip: int = 0, search: Optional[str]=""): # to implement pagination
     
-    # posts = (db.query(models.Post_alchemy)
-    #          .filter(models.Post_alchemy.
+    # posts = (db.query(models.Post)
+    #          .filter(models.Post.
     #                  title.contains(search))
     #                  .limit(limit)
-    #                  .offset(skip).all()) #db.query(models.Post_alchemy).all()
+    #                  .offset(skip).all()) #db.query(models.Post).all()
     
-    posts=db.query(models.Post_alchemy, func.count(models.Vote_alchemy.post_id).label("votes"))\
-        .join(models.Vote_alchemy, models.Post_alchemy.id == models.Vote_alchemy.post_id, isouter=True)\
-        .group_by(models.Post_alchemy.id)\
-        .filter(models.Post_alchemy\
+    posts=db.query(models.Post, func.count(models.Vote.post_id).label("votes"))\
+        .join(models.Vote, models.Post.id == models.Vote.post_id, isouter=True)\
+        .group_by(models.Post.id)\
+        .filter(models.Post\
                      .title.contains(search))\
                      .limit(limit)\
                      .offset(skip).all()
@@ -94,11 +94,11 @@ def get_all_posts_sqlalchemy(db: Session = Depends(get_db),
 #get all posts of the current logged in user with SQLAlchemy
 @router.get("/my_posts",response_model=List[schemas.PostOut])
 def get_my_posts_sqlalchemy(db: Session = Depends(get_db),
-                           current_user: models.User_alchemy = Depends(oauth2.get_current_user)):   
-    posts = db.query(models.Post_alchemy, func.count(models.Vote_alchemy.post_id).label("votes"))\
-        .join(models.Vote_alchemy, models.Post_alchemy.id == models.Vote_alchemy.post_id, isouter=True)\
-        .group_by(models.Post_alchemy.id)\
-            .filter(models.Post_alchemy.owner_id == current_user.id).all()
+                           current_user: models.User = Depends(oauth2.get_current_user)):   
+    posts = db.query(models.Post, func.count(models.Vote.post_id).label("votes"))\
+        .join(models.Vote, models.Post.id == models.Vote.post_id, isouter=True)\
+        .group_by(models.Post.id)\
+            .filter(models.Post.owner_id == current_user.id).all()
     return posts
 
 
@@ -107,10 +107,10 @@ def get_my_posts_sqlalchemy(db: Session = Depends(get_db),
 @router.get("/{id}",response_model=schemas.PostOut)
 def get_post_sqlalchemy(id:int, 
                         db: Session = Depends(get_db)):
-    post = db.query(models.Post_alchemy, func.count(models.Vote_alchemy.post_id).label("votes"))\
-        .join(models.Vote_alchemy, models.Post_alchemy.id == models.Vote_alchemy.post_id, isouter=True)\
-        .group_by(models.Post_alchemy.id)\
-        .filter(models.Post_alchemy.id == id).first()
+    post = db.query(models.Post, func.count(models.Vote.post_id).label("votes"))\
+        .join(models.Vote, models.Post.id == models.Vote.post_id, isouter=True)\
+        .group_by(models.Post.id)\
+        .filter(models.Post.id == id).first()
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                              detail=f"post with id: {id} was not found")
@@ -130,8 +130,8 @@ def get_post_sqlalchemy(id:int,
 @router.delete("/{id}",status_code=status.HTTP_204_NO_CONTENT)
 def delete_post_sqlalchemy(id:int, 
                            db: Session = Depends(get_db),
-                           current_user:models.User_alchemy= Depends(oauth2.get_current_user)):
-    post_query = db.query(models.Post_alchemy).filter(models.Post_alchemy.id == id)
+                           current_user:models.User= Depends(oauth2.get_current_user)):
+    post_query = db.query(models.Post).filter(models.Post.id == id)
     post=post_query.first()
     if post is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -149,8 +149,8 @@ def delete_post_sqlalchemy(id:int,
 def update_post_sqlalchemy(id:int, 
                            updated_post: schemas.PostCreate, 
                            db: Session = Depends(get_db),
-                           current_user: models.User_alchemy = Depends(oauth2.get_current_user)):
-    post_query = db.query(models.Post_alchemy).filter(models.Post_alchemy.id == id)
+                           current_user: models.User = Depends(oauth2.get_current_user)):
+    post_query = db.query(models.Post).filter(models.Post.id == id)
     post = post_query.first()
     if post is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,

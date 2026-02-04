@@ -13,7 +13,7 @@ def create_user_sqlalchemy(user: schemas.UserCreate, db: Session = Depends(get_d
     print("==========================")
     hashed_password = utils.hash_password(user.password) #hash the password before storing
     user.password = hashed_password 
-    db_user = models.User_alchemy(**user.model_dump()) #unpacking the user dictionary to match the model fields
+    db_user = models.User(**user.model_dump()) #unpacking the user dictionary to match the model fields
     db.add(db_user)
     db.commit()
     db.refresh(db_user)  #to get the updated instance with the generated ID
@@ -22,7 +22,7 @@ def create_user_sqlalchemy(user: schemas.UserCreate, db: Session = Depends(get_d
 # Get a user by id using SQLAlchemy
 @router.get("/sqlalchemy/users/{id}",response_model=schemas.User)
 def get_user_sqlalchemy(id:int, db: Session = Depends(get_db)):
-    user = db.query(models.User_alchemy).filter(models.User_alchemy.id == id).first()
+    user = db.query(models.User).filter(models.User.id == id).first()
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                              detail=f"user with id: {id} was not found")

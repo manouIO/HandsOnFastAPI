@@ -10,18 +10,18 @@ router = APIRouter(
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def vote(vote: schemas.Vote, db: Session = Depends(get_db), 
-         current_user: models.User_alchemy = Depends(oauth2.get_current_user)):
+         current_user: models.User = Depends(oauth2.get_current_user)):
     
-    post=db.query(models.Post_alchemy).filter(models.Post_alchemy.id == vote.post_id).first() 
+    post=db.query(models.Post).filter(models.Post.id == vote.post_id).first() 
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                       detail=f"post with id {vote.post_id} does not exist")
 
     if vote.dir == 1:  
         # Check if the user has already voted for the post
-        vote_query = db.query(models.Vote_alchemy).filter(
-            models.Vote_alchemy.post_id == vote.post_id,
-            models.Vote_alchemy.user_id == current_user.id
+        vote_query = db.query(models.Vote).filter(
+            models.Vote.post_id == vote.post_id,
+            models.Vote.user_id == current_user.id
         )
         found_vote = vote_query.first()
         if found_vote:
@@ -29,14 +29,14 @@ def vote(vote: schemas.Vote, db: Session = Depends(get_db),
                                 detail="You have already voted for this post")
         
         # Create a new vote
-        new_vote = models.Vote_alchemy(post_id=vote.post_id, user_id=current_user.id) #this adds a new row to the votes table
+        new_vote = models.Vote(post_id=vote.post_id, user_id=current_user.id) #this adds a new row to the votes table
         db.add(new_vote)
         db.commit()
         return {"message": "Successfully added vote"}
     else:  # vote.dir==0 Remove vote  
-        vote_query = db.query(models.Vote_alchemy).filter(
-            models.Vote_alchemy.post_id == vote.post_id,
-            models.Vote_alchemy.user_id == current_user.id
+        vote_query = db.query(models.Vote).filter(
+            models.Vote.post_id == vote.post_id,
+            models.Vote.user_id == current_user.id
         )
         found_vote = vote_query.first()
         if not found_vote: # ie if found_vote is None, therefore no vote to delete253

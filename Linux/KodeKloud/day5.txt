@@ -1,0 +1,94 @@
+    1  history
+    2  cd Documents/Training/Linux_training/KodeKloud
+    3  mkdir -p /dir1/sub_dir1/
+    4  ls
+    5  mkdir -p /dir1/sub_dir1
+    6  sudo mkdir -p /dir1/sub_dir1
+    7  ls
+    8  cd
+    9  mkdir -p /home/maryse/Documents/Training/Linux_training/KodeKloud/dir1/sub_dir1
+   10  cd Documents/Training/Linux_training/KodeKloud
+   11  ls
+   12  cd dir1/sub_dir1
+   13  cd ..
+   14  touch dir1/sub_dir1/kode1.txt
+   15  cd dir1/sub_dir1/
+   16  la
+   17  cat > kode1.txt
+   18  cat > kode2.txt
+   19  cd ../..
+   20  mkdir ./dir1/sub_dir2
+   21  ls
+   22  cd dir1
+   23  ls
+   24  cd ..
+   25  du -sk dir1
+   26  du -sh dir1
+   27  ls -lh dir1
+   28  cd dir1/sub_dir1
+   29  ls
+   30  tar -cf kode.tar kode1.txt kode2.txt
+   31  ls
+   32  gzip kode.tar
+   33  bzip kode.tar
+   34  bzip2 kode.tar
+   35  bzip2 kode1.txt
+   36  gzip kode1.txt
+   37  ls
+   38  xz kode2.txt
+   39  ls
+   40  zcat kode.tar.gz
+   41  zcat kode1.txt.bz2
+   42  xzcat kode2.txt.xz
+   43  #zcat, bzcat,xzcat allows you to read compressend files without uncompressing them
+   44  locate d2l-en.pdf
+   45  gunzip kode.tar.gz
+   46  unxz kode2.txt.xz
+   47  bunzip2 kode1.txt.bz2
+   48  ls
+   49  grep some kode1.txt
+   50  grep -r some .
+   51  grep -i SOME  kode1.txt
+   52  man find
+   53  grep -A1 Arsenal
+   54  grep -A1 Arsenal premier_league.txt
+   55  grep -A2 Arsenal  premier_league.txt
+   56  grep -B1 Liverpool  premier_league.txt
+   57  grep -B1 Chelsea -A1 Liverpool  premier_league.txt
+   58  grep -B1-A1 Liverpool  premier_league.txt
+   59  grep -B1 -A1 Liverpool  premier_league.txt
+   60  man less
+   61  seq 1000 > longfile.txt
+   62  for i in {1..100}; do echo "This is line number $i" >> longfile.txt; done\n
+   63  less longfile.txt
+   64  for i in {1..100}; do echo "This is line number $i" > longfile.txt; done\n
+   65  less longfile.txt
+   66  for i in {1..100}; do echo "This is line number $i" >> longfile.txt; done\n
+   67  less longfile.txt
+   68  #IO redirection
+   69  cat > sample_txt
+   70  echo $SHELL > shell.txt
+   71  cat shell.txt
+   72  echo "this is the z shell" >> shell.txt # in oder to append use >>
+   73  cat shell.txt
+   74  cat missing_file 2> error.txt#Redirect just the error message
+   75  cat missing_file 2> error.txt #Redirect just the error message
+   76  cat error.txt
+   77  cat missing_file 2>> shell.txt
+   78  cat shell.txt
+   79  cat sample_txt 
+   80  cat >> sample_txt 
+   81  cat sample_txt 
+   82  grep -i Hello sample_txt > file.txt
+   83  cat file.txt
+   84  less file.txt
+   85  grep -i NUMBER longfile.txt | less  #command line pipes command1| command2\n
+   86  echo $SHELL | tee shell.txt
+   87  echo "this is some new text line" | tee -a shell.txt
+   88  cat shell.txt
+   89  history >> ../../day4.txt
+   90  history -c
+   91  # VIM editor
+   92  ls
+   93  vim longfile.txt
+   94  update-alternatives --display editor

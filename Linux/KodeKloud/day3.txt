@@ -1,0 +1,157 @@
+    1  history -w
+    2  fc -W
+    3  ls
+    4  man ls
+    5  ls
+    6  ls -a
+    7  ls -A
+    8  ls -l
+    9  ls -d
+   10  cd Documents
+   11  ls -d
+   12  man ls -d
+   13  man ls
+   14  ls -f
+   15  ls -g
+   16  history
+   17  man ls
+   18  ls -d
+   19  ls
+   20  man ls
+   21  ls --directory
+   22  ls . -d
+   23  ls -d *
+   24  clear
+   25  ls -d *
+   26  ls -d Documents
+   27  cd ..
+   28  ls -d Documents
+   29  ls -d Documents/
+   30  cd Documents
+   31  ls -d /
+   32  ls -d */
+   33  man cd
+   34  help cd
+   35  cd .
+   36  cd ..
+   37  cd Documents/Training/Teachings
+   38  cd ..
+   39  cd ../
+   40  cd-
+   41  cd -
+   42  ls
+   43  cd Linux_training
+   44  ls
+   45  cd Linux_Learning
+   46  ls
+   47  cd ..
+   48  cd Topic1
+   49  ls
+   50  history > day1_29092025.md
+   51  ls
+   52  ls --help
+   53  man cp
+   54  apropos director
+   55  apropos-s 1,8 director
+   56  apropos -s 1,8 director
+   57  systemctl
+   58  pwd
+   59  man cd
+   60  cd ..
+   61  ls
+   62  cd PDB470S
+   63  ls
+   64  git config --global credential.helper store\n
+   65  cd ../..
+   66  cd Training
+   67  ls
+   68  cd Linux_training
+   69  ls
+   70  ls Linux_Learning
+   71  clear
+   72  uptime
+   73  pushd
+   74  ls
+   75  pushd Linux_training
+   76  ls
+   77  cd..
+   78  cd ..
+   79  pwd
+   80  pushd Documents
+   81  popd
+   82  whatis ls
+   83  ls
+   84  cd Documents
+   85  ls
+   86  mkdir test_tuesday test_wed
+   87  ls
+   88  cd test_tuesday
+   89  touch  nana_00{1,3,4}.txt 
+   90  ls
+   91  cd ..
+   92  ls
+   93  mv -p test_tuesday   test_wed
+   94  mv -r test_tuesday   test_wed
+   95  mv -a test_tuesday   test_wed
+   96  mv  test_tuesday/*   test_wed/
+   97  ls 
+   98  ls test_wed
+   99  tree .
+  100  cd test_wed
+  101  tree . 
+  102  tree ../Immigration_Canada
+  103  echo $SHELL
+  104  code .
+  105  cd
+  106  sudo update wps
+  107  cd Downloads
+  108  sudo apt install ./wps-office_11.1.0.11723.XA_amd64.deb
+  109  sudo apt autoremove
+  110  history
+  111  history > linux_intro1.txt
+  112  echo $LOGNAME
+  113  which obs-studio
+  114  export PATH=$PATH:/opt/obs/bin
+  115  which obs-studio
+  116  echo $PS1
+  117  cd
+  118  cd Documents/Training 
+  119  echo $SHELL
+  120  cd
+  121  cd Documents/Training
+  122  ls
+  123  cd Teachings
+  124  git pull origin 2-adding-content-from-mac\n
+  125  uname -r
+  126  dmesg
+  127  cd
+  128  dmesg
+  129  udevadm info --query=path --name=/dev//dev
+  130  udevadm info --query=path --name=/dev//dev/
+  131  udevadm info --query=path --name=/dev//dev
+  132  udevadm info --query=path --name=/dev/char
+  133  udevadm monitor
+  134  ls pci
+  135  lspci
+  136  where dev
+  137  dmesg
+  138  udevadm info --query=path --name=/dev/sda5
+  139  lblk
+  140  lsblk
+  141  lscpu
+  142  lsmem 
+  143  lsmem --summary
+  144  free -m
+  145  free -g
+  146  history
+  147  runlevel
+  148  which init
+  149  ls -l /usr/sbin/init
+  150  apt edit-sources
+  151  sudo apt edit-sources
+  152  apt search code
+  153  apt search telnet
+  154  apt-cache search telnet
+  155  cd Documents/Training/Teachings
+  156  git pull origin 2-adding-content-from-mac\n
+

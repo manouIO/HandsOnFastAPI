@@ -6,7 +6,7 @@ from .routers import post, user, auth, vote
 
 #models.Base.metadata.create_all(bind=engine) #create the database tables
 # we don't need to create the tables here because we will use alembic to handle the database migrations
-
+# ----- no to consider ----:
 app=FastAPI() #fastapi instance
 origins = ["*"]  # Allows all origins, ie any domain can access the API. but it is security 
                 #best practice to limit this to only the domains you want to allow.

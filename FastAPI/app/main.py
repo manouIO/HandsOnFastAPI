@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app import models
 from .database import engine
 from .routers import post, user, auth, vote
-
+### ====  NOTHING ====
 #models.Base.metadata.create_all(bind=engine) #create the database tables
 # we don't need to create the tables here because we will use alembic to handle the database migrations
 # ----- no to consider ----:

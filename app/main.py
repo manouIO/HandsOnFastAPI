@@ -28,4 +28,4 @@ app.include_router(vote.router) #include the vote router
 
 @app.get("/") #root endpoint
 def root():
-    return {"message":"Welcome to FastAPI!"}
+    return {"message":"Now it is time to deploy!"}

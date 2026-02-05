@@ -1,0 +1,19 @@
+# Virtual Environment (The 156MB folder)
+.venv/
+venv/
+env/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables (Secret keys)
+.env
+
+# Databases
+*.sqlite3
+*.db
+
+# OS-specific files
+.DS_Store

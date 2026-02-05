@@ -1,4 +1,0 @@
-1 Arsenal
-2 Liverpool
-3 Chelsea
-4 Manchester City

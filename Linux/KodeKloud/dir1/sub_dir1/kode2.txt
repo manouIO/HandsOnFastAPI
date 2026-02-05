@@ -1,3 +1,0 @@
-some text
-if you want to create a directory in the current dir use
-mkdir -p ./dir1/sub_dir1

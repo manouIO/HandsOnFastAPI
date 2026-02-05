@@ -1,3 +1,0 @@
-some text
-cant create directories and parent directories only from the home dir
-mkdir -p /home/~/~

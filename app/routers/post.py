@@ -30,7 +30,7 @@ router = APIRouter(
 
      
 #Create a post method using SQLAlchemy
-@router.post("/",status_code=status.HTTP_201_CREATED,response_model=schemas.Post)
+@router.post("",status_code=status.HTTP_201_CREATED,response_model=schemas.Post)
 def create_post_sqlalchemy(post: schemas.PostCreate, 
                            db: Session = Depends(get_db), 
                            current_user: models.User= Depends(oauth2.get_current_user)): 
@@ -67,7 +67,7 @@ def create_post_sqlalchemy(post: schemas.PostCreate,
 #     return {"latest_post": latest_post}
        
 #get all posts method with SQLAlchemy
-@router.get("/", response_model=List[schemas.PostOut])
+@router.get("", response_model=List[schemas.PostOut])
 def get_all_posts_sqlalchemy(db: Session = Depends(get_db),
                     current_user: models.User = Depends(oauth2.get_current_user), #to get the current logged in user
                     limit: int = 10, skip: int = 0, search: Optional[str]=""): # to implement pagination

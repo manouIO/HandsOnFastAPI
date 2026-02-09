@@ -11,7 +11,7 @@ router = APIRouter(
 
 
 # Create a user using SQLAlchemy
-@router.post("/",status_code=status.HTTP_201_CREATED,response_model=schemas.User)
+@router.post("",status_code=status.HTTP_201_CREATED,response_model=schemas.User)
 def create_user_sqlalchemy(user: schemas.UserCreate, db: Session = Depends(get_db)):
     print("==========================")
     hashed_password = utils.hash_password(user.password) #hash the password before storing

@@ -1,6 +1,8 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr
 from datetime import datetime
 from typing import Optional, Literal
+
+from pydantic_settings import SettingsConfigDict
 
 #title str, content str,  do not add anything else
 # using pydantic models for data validation
@@ -14,33 +16,31 @@ class PostCreate(PostBase):
     pass
 
 #Schema for User response model
-class User(BaseModel):
+class UserOut(BaseModel):
     id: int
     email: EmailStr
     created_at: datetime
 
     # class Config: #we want to work with ORM objects
     #     orm_mode = True
-    model_config = {"from_attributes": True}
+    model_config = ConfigDict(from_attributes=True)
 
 #Let's create a schema for the post response model
 class Post(PostBase):
     id: int #the post id
     created_at: datetime
     #owner_id: int #we can include owner_id if needed but it is already contained in the owner field
-    owner: User #forward reference to User schema
+    owner: UserOut #forward reference to User schema
     #votes: optional[int] = 0  #to include the number of votes for the post
     
-    class Config:
-        orm_mode = True  #to work with ORM objects like SQLAlchemy
+    model_config = ConfigDict(from_attributes=True)  #to work with ORM objects like SQLAlchemy
 
 #Let's create a schema for the post response model with votes
 class PostOut(BaseModel):
     Post: Post #we must use a label in the db.query to avoid confusion because the original name is Post
     votes: int
 
-    class Config:
-        orm_mode = True #to work with ORM objects like SQLAlchemy
+    model_config = ConfigDict(from_attributes=True) #to work with ORM objects like SQLAlchemy
 
         
 #Schemas for User

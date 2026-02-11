@@ -11,7 +11,7 @@ router = APIRouter(
 
 
 # Create a user using SQLAlchemy
-@router.post("",status_code=status.HTTP_201_CREATED,response_model=schemas.User)
+@router.post("",status_code=status.HTTP_201_CREATED,response_model=schemas.UserOut)
 def create_user_sqlalchemy(user: schemas.UserCreate, db: Session = Depends(get_db)):
     print("==========================")
     hashed_password = utils.hash_password(user.password) #hash the password before storing
@@ -23,7 +23,7 @@ def create_user_sqlalchemy(user: schemas.UserCreate, db: Session = Depends(get_d
     return db_user
 
 # Get a user by id using SQLAlchemy
-@router.get("/{id}",response_model=schemas.User)
+@router.get("/{id}",response_model=schemas.UserOut)
 def get_user_sqlalchemy(id:int, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.id == id).first()
     if not user:

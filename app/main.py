@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
 from app import models
 from .database import engine
@@ -26,6 +26,6 @@ app.include_router(user.router)
 app.include_router(auth.router) #include the auth router
 app.include_router(vote.router) #include the vote router
 
-@app.get("/") #root endpoint
+@app.get("/", status_code=status.HTTP_200_OK) #root endpoint
 def root():
     return {"message":"Now it is time to deploy!"}

@@ -105,7 +105,8 @@ def get_my_posts_sqlalchemy(db: Session = Depends(get_db),
 # get one post by id using SQLAlchemy
 @router.get("/{id}",response_model=schemas.PostOut)
 def get_post_sqlalchemy(id:int, 
-                        db: Session = Depends(get_db)):
+                        db: Session = Depends(get_db),
+                        current_user: models.User = Depends(oauth2.get_current_user)):
     post = db.query(models.Post, func.count(models.Vote.post_id).label("votes"))\
         .join(models.Vote, models.Post.id == models.Vote.post_id, isouter=True)\
         .group_by(models.Post.id)\

@@ -49,6 +49,25 @@ def test_user(client: TestClient):
     user_dict['password'] = user_data['password']
     return user_dict #return the user data as a dictionary for use in other tests
 
+@pytest.fixture
+def test_user_2(client):
+    user_data = {"email": "user2@gmail.com", "password": "password1234"}
+    res = client.post("/sqlalchemy/users", json=user_data)
+    assert res.status_code == 201
+    new_user = schemas.UserOut(**res.json())
+    user_dict = new_user.model_dump()
+    user_dict['password'] = user_data['password']
+    return user_dict #return the user data as a dictionary for use in other tests
+
+@pytest.fixture
+def authorized_client_2(client, test_user_2):
+    # This client is logged in as the second user
+    token = create_access_token(data={"user_id": test_user_2['id']})
+    client.headers = {
+        **client.headers,
+        "Authorization": f"Bearer {token}"
+    }
+    return client
 
 @pytest.fixture()
 def token(test_user):
@@ -63,11 +82,14 @@ def authorized_client(client: TestClient, token: str):
     return client
 
 @pytest.fixture()
-def test_posts(test_user, session):
+def test_posts(test_user, test_user_2, session):
     posts_data = [
         {"title": "First Post", "content": "Content of the first post", "owner_id": test_user['id']},
         {"title": "Second Post", "content": "Content of the second post", "owner_id": test_user['id']},
-        {"title": "Third Post", "content": "Content of the third post", "owner_id": test_user['id']}
+        {"title": "Third Post", "content": "Content of the third post", "owner_id": test_user['id']},
+        {"title": "Fourth Post", "content": "Content of the fourth post", "owner_id": test_user_2['id']},
+        {"title": "Fifth Post", "content": "Content of the fifth post", "owner_id": test_user_2['id']},
+        {"title": "Sixth Post", "content": "Content of the sixth post", "owner_id": test_user_2['id']}
     ]
     
 
